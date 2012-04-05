@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="lib/rx.min.js"></script>
+	<script type="text/javascript" src="lib/rx.aggregates.min.js"></script>
+	<script type="text/javascript" src="lib/rx.coincidence.min.js"></script>
+	<script type="text/javascript" src="lib/rx.joinpatterns.min.js"></script>
+	<script type="text/javascript" src="lib/rx.time.min.js"></script>
+	<script type="text/javascript" src="lib/rx.jquery.min.js"></script>
+	<script type="text/javascript" src="lib/traits-0.4.js"></script>
+	
+	<script type="text/javascript" src="bin/Dictionary.js"></script>
+	<script type="text/javascript" src="bin/skins/HTMLTextSkin.js"></script>
+	<script type="text/javascript" src="bin/skins/HTMLButtonSkin.js"></script>
+	<script type="text/javascript" src="bin/components/UIElement.js"></script>
+	<script type="text/javascript" src="bin/components/Text.js"></script>
+	<script type="text/javascript" src="bin/components/Button.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var paragraph = new Text();
+			paragraph.parent = $('body');
+			paragraph.text = 'This is some awesome paragraph text.';
+			
+			var button = new Button();
+			button.parent = $('body');
+			button.label = 'My cool button!';
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>
