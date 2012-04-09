@@ -10,23 +10,34 @@
 	<script type="text/javascript" src="lib/traits-0.4.js"></script>
 	
 	<script type="text/javascript" src="bin/Dictionary.js"></script>
+	<script type="text/javascript" src="bin/skins/HTMLSkin.js"></script>
 	<script type="text/javascript" src="bin/skins/HTMLTextSkin.js"></script>
 	<script type="text/javascript" src="bin/skins/HTMLButtonSkin.js"></script>
+	<script type="text/javascript" src="bin/skins/HTMLToggleButtonSkin.js"></script>
 	<script type="text/javascript" src="bin/components/UIElement.js"></script>
 	<script type="text/javascript" src="bin/components/Text.js"></script>
 	<script type="text/javascript" src="bin/components/Button.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			var paragraph = new Text();
-			paragraph.parent = $('body');
+			paragraph.parent = $('#container');
 			paragraph.text = 'This is some awesome paragraph text.';
 			
 			var button = new Button();
-			button.parent = $('body');
-			button.label = 'My cool button!';
+			button.parent = $('#container');
+			
+			var toggler = new Button()
+			toggler.parent = $('#container');
+			toggler.selected.subscribe(function(selected) {
+				toggler.label = selected ? 'Untoggle' : 'Toggle';
+				button.toggle = selected;
+			});
+			
+			button.index = $("#container").children().length;
 		});
 	</script>
 </head>
 <body>
+<div id="container">
 </body>
 </html>
