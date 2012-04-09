@@ -1,13 +1,9 @@
-class HTMLButtonSkin
-	constructor: () ->
-		button = $ '<button></button>'
-		disposable = Rx.Disposable.empty
+class HTMLButtonSkin extends HTMLSkin
+	getSkin: () -> $ '<button></button>'
 		
-		@register = (element) ->
-			disposable.dispose()
-			return if !element?
-			
-			disposable = new Rx.CompositeDisposable()
-			disposable.add element.label.subscribe (text) -> button.text text
-			disposable.add element.parent.subscribe (parent) -> parent.append button
-			return
+	addListeners: (element, skin) -> 
+		clicked = false
+		[
+			element.label.subscribe (text) -> skin.text text
+			skin.clickAsObservable().subscribe () -> element.selected = clicked = !clicked
+		]

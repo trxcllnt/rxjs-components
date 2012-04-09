@@ -1,23 +1,25 @@
 var HTMLTextSkin;
+var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
 HTMLTextSkin = (function() {
 
+  __extends(HTMLTextSkin, HTMLSkin);
+
   function HTMLTextSkin() {
-    var disposable, paragraph;
-    paragraph = $('<p></p>');
-    disposable = Rx.Disposable.empty;
-    this.register = function(element) {
-      disposable.dispose();
-      if (!(element != null)) return;
-      disposable = new Rx.CompositeDisposable();
-      disposable.add(element.text.subscribe(function(text) {
-        return paragraph.text(text);
-      }));
-      disposable.add(element.parent.subscribe(function(parent) {
-        return parent.append(paragraph);
-      }));
-    };
+    HTMLTextSkin.__super__.constructor.apply(this, arguments);
   }
+
+  HTMLTextSkin.prototype.getSkin = function() {
+    return $('<p></p>');
+  };
+
+  HTMLTextSkin.prototype.addListeners = function(element, skin) {
+    return [
+      element.text.subscribe(function(text) {
+        return skin.text(text);
+      })
+    ];
+  };
 
   return HTMLTextSkin;
 

@@ -1,23 +1,29 @@
 var HTMLButtonSkin;
+var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
 HTMLButtonSkin = (function() {
 
+  __extends(HTMLButtonSkin, HTMLSkin);
+
   function HTMLButtonSkin() {
-    var button, disposable;
-    button = $('<button></button>');
-    disposable = Rx.Disposable.empty;
-    this.register = function(element) {
-      disposable.dispose();
-      if (!(element != null)) return;
-      disposable = new Rx.CompositeDisposable();
-      disposable.add(element.label.subscribe(function(text) {
-        return button.text(text);
-      }));
-      disposable.add(element.parent.subscribe(function(parent) {
-        return parent.append(button);
-      }));
-    };
+    HTMLButtonSkin.__super__.constructor.apply(this, arguments);
   }
+
+  HTMLButtonSkin.prototype.getSkin = function() {
+    return $('<button></button>');
+  };
+
+  HTMLButtonSkin.prototype.addListeners = function(element, skin) {
+    var clicked;
+    clicked = false;
+    return [
+      element.label.subscribe(function(text) {
+        return skin.text(text);
+      }), skin.clickAsObservable().subscribe(function() {
+        return element.selected = clicked = !clicked;
+      })
+    ];
+  };
 
   return HTMLButtonSkin;
 
