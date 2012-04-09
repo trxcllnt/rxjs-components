@@ -3,6 +3,14 @@ class Button extends UIElement
 		super()
 		
 		@define 'label', 'Button'
-				
+		@define 'toggle', false
+		@define 'selected', false
+		
+		@define('skin', null).subscribe @onExtensionChanged()
+		
 		# Initialize ourselves with an HTMLButtonSkin
-		@define('skin', new HTMLButtonSkin()).subscribe @onExtensionChanged()
+		@toggle.subscribe (toggle) => 
+			@skin = if toggle
+			then new HTMLToggleButtonSkin()
+			else new HTMLButtonSkin()
+		

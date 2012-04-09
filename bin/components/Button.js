@@ -6,9 +6,15 @@ Button = (function() {
   __extends(Button, UIElement);
 
   function Button() {
+    var _this = this;
     Button.__super__.constructor.call(this);
     this.define('label', 'Button');
-    this.define('skin', new HTMLButtonSkin()).subscribe(this.onExtensionChanged());
+    this.define('toggle', false);
+    this.define('selected', false);
+    this.define('skin', null).subscribe(this.onExtensionChanged());
+    this.toggle.subscribe(function(toggle) {
+      return _this.skin = toggle ? new HTMLToggleButtonSkin() : new HTMLButtonSkin();
+    });
   }
 
   return Button;
