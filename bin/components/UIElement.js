@@ -11,7 +11,8 @@ UIElement = (function() {
     this.define('y', 0);
     this.define('width', 0);
     this.define('height', 0);
-    this.define('parent', $('body'));
+    this.define('parent', null);
+    this.define('index', -1);
   }
 
   UIElement.prototype.onExtensionChanged = function() {
@@ -20,8 +21,12 @@ UIElement = (function() {
     extension = null;
     return function(newExtension) {
       if (newExtension === extension) return;
-      if (extension != null) extension.register(null);
-      if (newExtension != null) (extension = newExtension).register(_this);
+      if ((extension != null) && (extension.element != null)) {
+        extension.element.onCompleted();
+      }
+      if ((newExtension != null) && (newExtension.element != null)) {
+        (extension = newExtension).element = _this;
+      }
     };
   };
 
