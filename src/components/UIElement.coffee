@@ -2,12 +2,21 @@ class UIElement extends Dictionary
 	constructor: () ->
 		super()
 		
-		@define 'x', 0
-		@define 'y', 0
-		@define 'width', 0
-		@define 'height', 0
-		@define 'parent', null
+		@define 'x', NaN
+		@define 'y', NaN
+		@define 'z', NaN
+		
+		@define 'width', NaN
+		@define 'height', NaN
+		
+		@define('parent', null)
+		
 		@define 'index', -1
+		
+		@useObservable 'addedChild', @define('addedChild', null).where((x) -> x?)
+		@useObservable 'removedChild', @define('removedChild', null).where((x) -> x?)
+		
+		return
 	
 	# Returns a function that watches when an extension instance
 	# changes, de-registers it, and registers the new extension.
