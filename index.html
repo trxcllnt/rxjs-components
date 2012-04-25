@@ -17,9 +17,11 @@
 	<script type="text/javascript" src="bin/skins/HTMLTextSkin.js"></script>
 	<script type="text/javascript" src="bin/skins/HTMLButtonSkin.js"></script>
 	<script type="text/javascript" src="bin/skins/HTMLToggleButtonSkin.js"></script>
+	<script type="text/javascript" src="bin/skins/HTMLSliderSkin.js"></script>
 	<script type="text/javascript" src="bin/components/UIElement.js"></script>
 	<script type="text/javascript" src="bin/components/Text.js"></script>
 	<script type="text/javascript" src="bin/components/Button.js"></script>
+	<script type="text/javascript" src="bin/components/Range.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			var paragraph = new Text();
@@ -37,6 +39,10 @@
 			});
 			
 			button.index = $("#container").children().length;
+			
+			var slider = new Range()
+			slider.parent = $("#container")
+			slider.width = 100;
 		});
 	</script>
 </head>
